@@ -4,11 +4,30 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "tb_classlog")
 public class ClassLog {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
 	private LocalDate date;
 	private LocalDateTime readTimeStamp;
+	
+	@ManyToOne
+	@JoinColumn(name = "schedule_id")
 	private Schedule schedule;
+	
+	@ManyToOne
+	@JoinColumn(name = "actual_classroom_id")
 	private Classroom actualClassRoom;
 	
 	public ClassLog() {

@@ -3,19 +3,45 @@ package br.edu.uva.sistemasembarcados.model;
 import java.time.LocalTime;
 import java.util.Objects;
 
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
 import br.edu.uva.sistemasembarcados.model.enums.DayOfWeek;
 
+@Entity
+@Table(name = "tb_schedule")
 public class Schedule {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	@Enumerated(EnumType.STRING)
 	private DayOfWeek dayOfWeek;
+	
 	private LocalTime startTime;
 	private LocalTime endTime;
 	
+	@ManyToOne
+	@JoinColumn(name = "teacher_id")
 	private User teacher;
+	
+	@ManyToOne
+	@JoinColumn(name = "subject_id")
 	private Subject subject;
+	
+	@ManyToOne
+	@JoinColumn(name = "classroom_id")
 	private Classroom usualRoom;
 	
 	public Schedule() {
+
 	}
 	public Schedule(DayOfWeek dayOfWeek, LocalTime startTime, LocalTime endTime, User teacher, Subject subject,
 			Classroom usualRoom) {

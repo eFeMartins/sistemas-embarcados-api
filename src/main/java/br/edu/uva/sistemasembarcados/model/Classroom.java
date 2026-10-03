@@ -2,8 +2,19 @@ package br.edu.uva.sistemasembarcados.model;
 
 import java.util.Objects;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name ="tb_classromm")
 public class Classroom {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
 	private String roomNumber;
 	private String boardId;
 
