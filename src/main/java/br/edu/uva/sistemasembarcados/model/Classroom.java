@@ -1,5 +1,6 @@
 package br.edu.uva.sistemasembarcados.model;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 import javax.persistence.Entity;
@@ -10,7 +11,8 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name ="tb_classromm")
-public class Classroom {
+public class Classroom implements Serializable{
+	private static final Long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;

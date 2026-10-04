@@ -1,5 +1,6 @@
 package br.edu.uva.sistemasembarcados.model;
 
+import java.io.Serializable;
 import java.time.LocalTime;
 import java.util.Objects;
 
@@ -17,7 +18,9 @@ import br.edu.uva.sistemasembarcados.model.enums.DayOfWeek;
 
 @Entity
 @Table(name = "tb_schedule")
-public class Schedule {
+public class Schedule implements Serializable{
+	private static final Long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;

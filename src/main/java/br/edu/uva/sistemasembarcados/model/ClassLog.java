@@ -1,5 +1,6 @@
 package br.edu.uva.sistemasembarcados.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -14,7 +15,9 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "tb_classlog")
-public class ClassLog {
+public class ClassLog implements Serializable{
+	private static final Long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
