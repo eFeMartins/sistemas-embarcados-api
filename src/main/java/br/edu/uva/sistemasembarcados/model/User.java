@@ -18,7 +18,7 @@ import br.edu.uva.sistemasembarcados.model.enums.Role;
 @Entity
 @Table(name = "tb_user")
 public class User implements Serializable{
-	private static final Long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -42,6 +42,13 @@ public class User implements Serializable{
 		this.rfidTag = rfidTag;
 		this.role = role;
 		this.schedules = schedules;
+	}
+	
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
 	}
 	
 	public String getName() {

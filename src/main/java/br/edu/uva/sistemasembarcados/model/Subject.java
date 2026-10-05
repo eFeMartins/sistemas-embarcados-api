@@ -12,7 +12,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "subject_id")
 public class Subject implements Serializable{
-	private static final Long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
