@@ -16,7 +16,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "tb_classlog")
 public class ClassLog implements Serializable{
-	private static final Long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,7 +31,7 @@ public class ClassLog implements Serializable{
 	
 	@ManyToOne
 	@JoinColumn(name = "actual_classroom_id")
-	private Classroom actualClassRoom;
+	private Classroom actualClassroom;
 	
 	public ClassLog() {
 	}
@@ -39,7 +39,7 @@ public class ClassLog implements Serializable{
 		this.date = date;
 		this.readTimeStamp = readTimeStamp;
 		this.schedule = schedule;
-		this.actualClassRoom = actualClassRoom;
+		this.actualClassroom = actualClassRoom;
 	}
 	
 	public LocalDate getDate() {
@@ -61,10 +61,10 @@ public class ClassLog implements Serializable{
 		this.schedule = schedule;
 	}
 	public Classroom getActualClassRoom() {
-		return actualClassRoom;
+		return actualClassroom;
 	}
-	public void setActualClassRoom(Classroom actualClassRoom) {
-		this.actualClassRoom = actualClassRoom;
+	public void setActualClassroom(Classroom actualClassRoom) {
+		this.actualClassroom = actualClassRoom;
 	}
 	
 	@Override
@@ -85,7 +85,7 @@ public class ClassLog implements Serializable{
 	
 	@Override
 	public String toString() {
-		return "classLog [id=" + id + ", schedule=" + schedule + ", actualClassRoom=" + actualClassRoom + "]";
+		return "classLog [id=" + id + ", schedule=" + schedule + ", actualClassRoom=" + actualClassroom + "]";
 	}
 
 }

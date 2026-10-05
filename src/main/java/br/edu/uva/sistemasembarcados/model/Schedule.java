@@ -55,6 +55,14 @@ public class Schedule implements Serializable{
 		this.subject = subject;
 		this.usualRoom = usualRoom;
 	}
+	
+	
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
 	public DayOfWeek getDayOfWeek() {
 		return dayOfWeek;
 	}
@@ -73,10 +81,10 @@ public class Schedule implements Serializable{
 	public void setEndTime(LocalTime endTime) {
 		this.endTime = endTime;
 	}
-	public User getTeacher() {
+	public User getUser() {
 		return teacher;
 	}
-	public void setTeacher(User teacher) {
+	public void setUser(User teacher) {
 		this.teacher = teacher;
 	}
 	public Subject getSubject() {

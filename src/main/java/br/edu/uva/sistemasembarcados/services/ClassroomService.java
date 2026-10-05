@@ -29,29 +29,29 @@ public class ClassroomService {
     @Transactional(readOnly = true)
     public Classroom findById(Long id) {
         return classroomRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Classroom not found with ID: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("classroom not found with ID: " + id));
     }
 
     @Transactional(readOnly = true)
     public Classroom findByBoardId(String boardId) {
         return classroomRepository.findByBoardId(boardId)
-                .orElseThrow(() -> new ResourceNotFoundException("Classroom not found with Board ID: " + boardId));
+                .orElseThrow(() -> new ResourceNotFoundException("classroom not found with Board ID: " + boardId));
     }
 
     @Transactional(readOnly = true)
     public Classroom findByRoomNumber(String roomNumber) {
         return classroomRepository.findByRoomNumber(roomNumber)
-                .orElseThrow(() -> new ResourceNotFoundException("Classroom not found with room number: " + roomNumber));
+                .orElseThrow(() -> new ResourceNotFoundException("classroom not found with room number: " + roomNumber));
     }
 
     @Transactional
     public Classroom save(Classroom classroom) {
         if (classroomRepository.findByRoomNumber(classroom.getRoomNumber()).isPresent()) {
-            throw new DuplicateResourceException("Room number already exists: " + classroom.getRoomNumber());
+            throw new DuplicateResourceException("room number already exists: " + classroom.getRoomNumber());
         }
 
         if (classroomRepository.findByBoardId(classroom.getBoardId()).isPresent()) {
-            throw new DuplicateResourceException("Board ID already exists: " + classroom.getBoardId());
+            throw new DuplicateResourceException("board ID already exists: " + classroom.getBoardId());
         }
 
         return classroomRepository.save(classroom);
@@ -64,7 +64,7 @@ public class ClassroomService {
         if (classroomDetails.getRoomNumber() != null && !classroomDetails.getRoomNumber().equals(existingClassroom.getRoomNumber())) {
             classroomRepository.findByRoomNumber(classroomDetails.getRoomNumber()).ifPresent(found -> {
                 if (!found.getId().equals(id)) {
-                    throw new DuplicateResourceException("Room number already belongs to another classroom: " + classroomDetails.getRoomNumber());
+                    throw new DuplicateResourceException("room number already belongs to another classroom: " + classroomDetails.getRoomNumber());
                 }
             });
             existingClassroom.setRoomNumber(classroomDetails.getRoomNumber());
@@ -73,7 +73,7 @@ public class ClassroomService {
         if (classroomDetails.getBoardId() != null && !classroomDetails.getBoardId().equals(existingClassroom.getBoardId())) {
             classroomRepository.findByBoardId(classroomDetails.getBoardId()).ifPresent(found -> {
                 if (!found.getId().equals(id)) {
-                    throw new DuplicateResourceException("Board ID already belongs to another classroom: " + classroomDetails.getBoardId());
+                    throw new DuplicateResourceException("board ID already belongs to another classroom: " + classroomDetails.getBoardId());
                 }
             });
             existingClassroom.setBoardId(classroomDetails.getBoardId());
@@ -89,7 +89,7 @@ public class ClassroomService {
         if (newBoardId != null && !newBoardId.equals(existingClassroom.getBoardId())) {
             classroomRepository.findByBoardId(newBoardId).ifPresent(found -> {
                 if (!found.getId().equals(id)) {
-                    throw new DuplicateResourceException("Board ID already belongs to another classroom: " + newBoardId);
+                    throw new DuplicateResourceException("board ID already belongs to another classroom: " + newBoardId);
                 }
             });
             existingClassroom.setBoardId(newBoardId);

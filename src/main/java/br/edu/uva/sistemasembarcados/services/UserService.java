@@ -2,7 +2,7 @@ package br.edu.uva.sistemasembarcados.services;
 
 import java.util.List;
 
-import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,21 +18,26 @@ public class UserService {
 	@Autowired
 	private UserRepository userRepository;
 	
+	@Transactional(readOnly = true)
 	public List<User> findAll(){
 		return userRepository.findAll();
 	}
+	@Transactional(readOnly = true)
 	public User findById(Long id) {
 		return userRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("user by id not found message"));
 	}
+	@Transactional(readOnly = true)
 	public User findByRfidTag(String rfid) {
 		return userRepository.findByRfidTag(rfid)
 				.orElseThrow(() -> new ResourceNotFoundException("user by rfid not found message"));
 	}
+	@Transactional(readOnly = true)
 	public User findByEmail(String email) {
 		return userRepository.findByEmail(email)
 				.orElseThrow(() -> new ResourceNotFoundException("user by email not found message"));
 	}
+	@Transactional
 	public User save(User user) {
 		// usar -> isPresent
 		// verificação de invalidos vem primeiro
@@ -46,11 +51,11 @@ public class UserService {
 	}
 	@Transactional
 	public User update(Long id, User userDetails) {
-	    // 1. Busca o usuário existente ou lança 404
+	    // 1. Busca o usuário existente
 	    User existingUser = userRepository.findById(id)
 	            .orElseThrow(() -> new ResourceNotFoundException("User ID: " + id +" not found"));
 
-	    // 2. Valida duplicidade de E-mail (se alterado, verifica se já pertence a OUTRO usuário)
+	    // 2. Valida duplicidade de E-mail (se alterado verifica se já pertence a OUTRO usuário)
 	    if (userDetails.getEmail() != null && !userDetails.getEmail().equals(existingUser.getEmail())) {
 	        userRepository.findByEmail(userDetails.getEmail()).ifPresent(userWithEmail -> {
 	            if (!userWithEmail.getId().equals(id)) {
@@ -60,7 +65,7 @@ public class UserService {
 	        existingUser.setEmail(userDetails.getEmail());
 	    }
 
-	    // 3. Valida duplicidade de RFID Tag (se alterada, verifica se já pertence a OUTRO usuário)
+	    // 3. Valida duplicidade de RFID Tag (se alterada verifica se já pertence a OUTRO usuário)
 	    if (userDetails.getRfidTag() != null && !userDetails.getRfidTag().equals(existingUser.getRfidTag())) {
 	        userRepository.findByRfidTag(userDetails.getRfidTag()).ifPresent(userWithRfid -> {
 	            if (!userWithRfid.getId().equals(id)) {
@@ -84,6 +89,7 @@ public class UserService {
 	    // 5. Persiste as alterações e retorna o objeto atualizado
 	    return userRepository.save(existingUser);
 	}
+	@Transactional
 	public void deleteById(Long id) {
 		// code
 		userRepository.deleteById(id);
