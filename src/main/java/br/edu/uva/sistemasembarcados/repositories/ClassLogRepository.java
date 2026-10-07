@@ -10,5 +10,5 @@ import br.edu.uva.sistemasembarcados.model.ClassLog;
 
 public interface ClassLogRepository extends JpaRepository<ClassLog, Long>{
 	public List<ClassLog> findByScheduleId(Long id);
-	public Optional<ClassLog> findByScheduleIdAndTimestampBetween(Long scheduleId, LocalDateTime startOfDay, LocalDateTime endOfDay);
+	public Optional<ClassLog> findByScheduleAndReadTimeStampBetween(Long scheduleId, LocalDateTime startOfDay, LocalDateTime endOfDay);
 }

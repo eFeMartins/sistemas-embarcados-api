@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import br.edu.uva.sistemasembarcados.model.Schedule;
 
 public interface ScheduleRepository extends JpaRepository<Schedule, Long>{
-	public List<Schedule> findByUserId(Long id);
-	public List<Schedule> findByUsualClassroomId(Long usualClassroomId);
+	public List<Schedule> findByTeacherId(Long id);
+	public List<Schedule> findByUsualRoomId(Long usualClassroomId);
 	public List<Schedule> findBySubjectId(Long subjectId);
 }

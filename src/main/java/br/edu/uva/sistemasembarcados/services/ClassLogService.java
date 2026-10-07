@@ -64,7 +64,7 @@ public class ClassLogService {
         LocalDateTime startOfDay = today.atStartOfDay();
         LocalDateTime endOfDay = today.atTime(LocalTime.MAX);
         
-        Optional<ClassLog> existingLog = classLogRepository.findByScheduleIdAndTimestampBetween(
+        Optional<ClassLog> existingLog = classLogRepository.findByScheduleAndReadTimeStampBetween(
                 activeSchedule.getId(), startOfDay, endOfDay);
 
         if (existingLog.isPresent()) {

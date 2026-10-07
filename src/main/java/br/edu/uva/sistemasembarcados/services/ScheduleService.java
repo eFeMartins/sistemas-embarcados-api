@@ -35,12 +35,12 @@ public class ScheduleService {
 
     @Transactional(readOnly = true)
     public List<Schedule> findByUserId(Long userId) {
-        return scheduleRepository.findByUserId(userId);
+        return scheduleRepository.findByTeacherId(userId);
     }
 
     @Transactional(readOnly = true)
     public List<Schedule> findByClassroomId(Long classroomId) {
-        return scheduleRepository.findByUsualClassroomId(classroomId);
+        return scheduleRepository.findByUsualRoomId(classroomId);
     }
 
     @Transactional(readOnly = true)
@@ -100,7 +100,7 @@ public class ScheduleService {
     private void validateTimeConflicts(Schedule schedule, Long currentId) {
         // valida se o professor ja possui aula no mesmo dia/horario
         if (schedule.getUser() != null && schedule.getDayOfWeek() != null) {
-            List<Schedule> userSchedules = scheduleRepository.findByUserId(schedule.getUser().getId());
+            List<Schedule> userSchedules = scheduleRepository.findByTeacherId(schedule.getUser().getId());
             for (Schedule s : userSchedules) {
                 if (!s.getId().equals(currentId) && s.getDayOfWeek() == schedule.getDayOfWeek()) {
                     if (hasTimeOverlap(schedule.getStartTime(), schedule.getEndTime(), s.getStartTime(), s.getEndTime())) {
@@ -112,7 +112,7 @@ public class ScheduleService {
 
         // valida se a sala já está ocupada no mesmo dia/horario
         if (schedule.getUsualRoom() != null && schedule.getDayOfWeek() != null) {
-            List<Schedule> classroomSchedules = scheduleRepository.findByUsualClassroomId(schedule.getUsualRoom().getId());
+            List<Schedule> classroomSchedules = scheduleRepository.findByUsualRoomId(schedule.getUsualRoom().getId());
             for (Schedule s : classroomSchedules) {
                 if (!s.getId().equals(currentId) && s.getDayOfWeek() == schedule.getDayOfWeek()) {
                     if (hasTimeOverlap(schedule.getStartTime(), schedule.getEndTime(), s.getStartTime(), s.getEndTime())) {
