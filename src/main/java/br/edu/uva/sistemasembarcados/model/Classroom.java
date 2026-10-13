@@ -20,9 +20,6 @@ public class Classroom implements Serializable{
 	private String roomNumber;
 	private String boardId;
 
-	public Classroom() {
-		
-	}
 	public Classroom(String roomNumber, String boardId) {
 		this.roomNumber = roomNumber;
 		this.boardId = boardId;

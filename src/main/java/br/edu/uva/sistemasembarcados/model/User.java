@@ -36,9 +36,10 @@ public class User implements Serializable{
 	
 	public User() {	
 	}
-	public User(String name, String password, String rfidTag, Role role, List<Schedule> schedules) {
+	public User(String name, String password, String email, String rfidTag, Role role, List<Schedule> schedules) {
 		this.name = name;
 		this.password = password;
+		this.email = email;
 		this.rfidTag = rfidTag;
 		this.role = role;
 		this.schedules = schedules;

@@ -42,6 +42,14 @@ public class ClassLog implements Serializable{
 		this.actualClassroom = actualClassRoom;
 	}
 	
+	
+	
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
 	public LocalDate getDate() {
 		return date;
 	}
